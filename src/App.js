@@ -1,14 +1,19 @@
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
 import Header from './Header';
 import Main from './Main';
-import Footer from './Footer';
+import Answers from './Answers';
 
 function App() {
   return (
     <>
     <Header/>
-    <Main/>
-    <Footer/>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' exact element={<Main />} />
+      <Route path='/answers' element={<Answers />} />
+    </Routes>
+    </BrowserRouter>
     </>
   );
 }
