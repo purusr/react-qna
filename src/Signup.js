@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import axios from 'axios'
 
 const Signup = ()=>{
     const [firstname, setFirstname] = useState()
@@ -9,9 +10,11 @@ const Signup = ()=>{
 
     const handleSubmit = (e) =>{
         e.preventDefault()
+        axios.post('http://localhost:5000/user/signup',{email:email, password:password, confirmPassword:password2, firstName:firstname, lastName:lastname})
+        .then((res) => console.log('signup success'))
+        .catch((error) => console.log('Signup failed'))
     }
 
-    console.log(firstname)
     return(
         <>
         <div className="container text-center">
