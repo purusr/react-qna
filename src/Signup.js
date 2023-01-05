@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Signup = ()=>{
     const [firstname, setFirstname] = useState()
     const [email, setEmail] = useState()
@@ -11,13 +12,18 @@ const Signup = ()=>{
     const handleSubmit = (e) =>{
         e.preventDefault()
         axios.post('http://localhost:5000/user/signup',{email:email, password:password, confirmPassword:password2, firstName:firstname, lastName:lastname})
-        .then((res) => console.log('signup success'))
-        .catch((error) => console.log('Signup failed'))
+        .then((res) => {
+            console.log(res)
+            toast('signup success')})
+        .catch((error) => {
+            console.log(error)
+            toast(error.response.data.message)})
     }
 
     return(
         <>
         <div className="container text-center">
+            <ToastContainer />
         <div style={{ padding: '50px' }}>
         <form>
             <div className="text-center"  style={{ width: '400px', display: 'inline-block', padding:'5px' }}>
