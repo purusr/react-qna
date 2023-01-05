@@ -1,4 +1,7 @@
 import { useState } from "react"
+import axios from 'axios'
+import { ToastContainer, toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signin = ()=>{
 const [email, setEmail] = useState()
@@ -6,11 +9,17 @@ const [loginpassword, setLoginPassword] = useState()
 
 const handleSignin = (e) =>{
    e.preventDefault()
+   axios.post('http://localhost:5000/user/signin', {email:email, password:loginpassword})
+   .then((res) =>{
+    toast('Signin success')})
+    .catch((error) =>{toast(error.response.data.message)})
+
 }
 
     return(
         <>
         <div className="container text-center">
+            <ToastContainer />
         <div style={{ padding: '50px' }}>
         <form>
             <div className="text-center"  style={{ width: '400px', display: 'inline-block', padding:'5px' }}>
