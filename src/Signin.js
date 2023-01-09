@@ -2,18 +2,22 @@ import { useState } from "react"
 import axios from 'axios'
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 const Signin = ()=>{
 const [email, setEmail] = useState()
 const [loginpassword, setLoginPassword] = useState()
+const navigate = useNavigate()
 
 const handleSignin = (e) =>{
    e.preventDefault()
    axios.post('http://localhost:5000/user/signin', {email:email, password:loginpassword})
    .then((res) =>{
-    toast('Signin success')})
-    .catch((error) =>{toast(error.response.data.message)})
-
+    console.log(res.data)
+    localStorage.setItem('profile', JSON.stringify(res.data))
+    toast('Signin success');
+}).catch((error) =>{toast(error.response.data.message)})
+navigate('/')
 }
 
     return(
