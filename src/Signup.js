@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 const Signup = ()=>{
+    const navigate = useNavigate()
     const [firstname, setFirstname] = useState()
     const [email, setEmail] = useState()
     const [lastname, setLastname] = useState()
@@ -14,7 +16,14 @@ const Signup = ()=>{
         axios.post('http://localhost:5000/user/signup',{email:email, password:password, confirmPassword:password2, firstName:firstname, lastName:lastname})
         .then((res) => {
             console.log(res)
-            toast('signup success')})
+            toast('signup success')
+            setEmail('')
+            setFirstname('')
+            setLastname('')
+            setPassword('')
+            setPassword2('')
+            navigate('/signin')
+        })
         .catch((error) => {
             console.log(error)
             toast(error.response.data.message)})
@@ -39,11 +48,11 @@ const Signup = ()=>{
             </div>
             <br/>
             <div className="text-center"  style={{ width: '400px', display: 'inline-block', padding:'5px'}}>
-            <input required onChange={(e) => setPassword(e.target.value)} value={password} className="form-control" placeholder="Password"></input>
+            <input type='password' required onChange={(e) => setPassword(e.target.value)} value={password} className="form-control" placeholder="Password"></input>
             </div>
             <br/>
             <div className="text-center"  style={{ width: '400px', display: 'inline-block', padding:'5px'}}>
-            <input required onChange={(e) => setPassword2(e.target.value)} value={password2} className="form-control" placeholder="Confirm Password"></input>
+            <input type='password' required onChange={(e) => setPassword2(e.target.value)} value={password2} className="form-control" placeholder="Confirm Password"></input>
             </div>
             <br/>
             <button onClick={(e) => handleSubmit(e)} className="btn btn-primary pa-10" type="submit">Sign Up</button>
