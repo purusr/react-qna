@@ -6,11 +6,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const Createquestion = () => {
-
+  const user = localStorage.getItem('profile')
+  const realuser = JSON.parse(user)
   const [question, setQuestion] = useState()
   const handlePost = (e) =>{ 
     e.preventDefault() 
-    axios.post('http://localhost:5000/Createquestion/63be25259287898b0ab008e0', { questionstring:question})
+    if (!user){
+      toast.error('Please login to post your question')
+    }else{
+    axios.post(`http://localhost:5000/Createquestion/${realuser.result._id}`, { questionstring:question, username:realuser.result.username})
       .then((res) => {
         console.log(res.data)
         toast('Post successfully');
@@ -20,6 +24,7 @@ const Createquestion = () => {
       .catch((error) => {
         console.log(error)
         toast(error.response.data.message)})
+      }
    
   }
   return (
