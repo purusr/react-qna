@@ -15,10 +15,10 @@ useEffect(()=>{
                 <div class="card-body">
                     <blockquote className="blockquote mb-0">
                     <p>{d.question}</p>
-                    <footer className="blockquote-footer">{d.userId} <cite title="Source Title"></cite></footer>
+                    <footer className="blockquote-footer">{d.userId[0].username} <cite title="Source Title"></cite></footer>
                     </blockquote>
                     <button className="btn">{d.answers.length}<i class="fa fa-comments fa-2x" aria-hidden="true"></i></button>
-                    <button className="btn">1234<i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i></button>
+                    <button className="btn">{d.likes.length}<i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i></button>
                 </div>
             </div>
 )}
