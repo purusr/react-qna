@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' exact element={<Main />} />
-      <Route path='/answers' element={<Answers />} />
+      <Route path='/answers/:id' element={<Answers />} />
       <Route path='/yourquestions' element={<Questions />} />
       <Route path='/signin' element={<Signin />} />
       <Route path='/signup' element={<Signup />} />
